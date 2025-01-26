@@ -30,17 +30,21 @@ func TestUserStore(t *testing.T) {
 	require.NoError(t, err)
 
 	//выполняю миграю в перед
-	if err := m.Up(); err != nil {
+	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
 		require.NoError(t, err)
 	}
+	//t.Cleanup(func() {
+	//	_, err := db.Exec(fmt.Sprintf("DROP TABLE %s;", strings.Join([]string{"users", "refresh_tokens", "reports"}, ",")))
+	//	require.NoError(t, err)
+	//})
 
 	//создаю обьект который будет вуполнять функционал по USER
 	userStore := store.NewUserStore(db)
 	ctx := context.Background()
-	user, err := userStore.CreateUser(ctx, "third@mail.ru", "testinpassword")
+	user, err := userStore.CreateUser(ctx, "first@mail.ru", "testinpassword")
 	require.NoError(t, err)
 
-	require.Equal(t, "third@mail.ru", user.Email)
+	require.Equal(t, "first@mail.ru", user.Email)
 	require.NoError(t, user.ComparePassword("testinpassword"))
 
 }
