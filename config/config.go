@@ -9,11 +9,14 @@ type Config struct { // структура конфио котоырй соде�
 	DatabaseName     string `env:"DB_NAME"`
 	DatabaseHost     string `env:"DB_HOST"`
 	DatabasePort     string `env:"DB_PORT"`
+	ApiServerPort    string `env:"API_SERVER_PORT"`
+	ApiServerHost    string `env:"API_SERVER_HOST"`
 	DatabasePortTest string `env:"DB_PORT_TEST"`
 	DatabaseUser     string `env:"DB_USER"`
 	DatabasePass     string `env:"DB_PASSWORD"`
 	Environment      Env    `env:"ENV" envDefault:"dev"`
 	ProjectRoot      string `env:"PROJECT_ROOT"`
+	JwtSecret        string `env:"JWT_SECRET"`
 }
 
 func New() (*Config, error) {

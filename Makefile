@@ -1,5 +1,7 @@
 db_login:
 	psql ${DATABASE_URL}
+db_login_Test:
+	psql ${DATABASE_URL_TESt}
 db_create_migrate:
 	migrate create -ext sql -dir migrations -seq init_mg
 db_migrate:
